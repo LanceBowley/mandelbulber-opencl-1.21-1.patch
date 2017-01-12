@@ -1,3 +1,32 @@
+Added a small patch to avoid the following build errors:
+
+---------------------------------------------------------------------------------------------------------------------------------
+OpenCL Build log:	"S:\TEMP\OCL4008T5.cl", line 427: error: invalid combination of type specifiers
+  	float3 half = input->lightVect - input->viewVector;
+  	       ^
+
+"S:\TEMP\OCL4008T5.cl", line 427: error: expected an identifier
+  	float3 half = input->lightVect - input->viewVector;
+  	            ^
+
+"S:\TEMP\OCL4008T5.cl", line 428: error: expected an identifier
+  	half = normalize(half);
+  	     ^
+
+"S:\TEMP\OCL4008T5.cl", line 428: error: direct use of type "half" requires
+          OpenCL extension cl_khr_f16 (not supported)
+  	half = normalize(half);
+  	^
+
+"S:\TEMP\OCL4008T5.cl", line 428: error: expected an expression
+  	half = normalize(half);
+  	                 ^
+
+"S:\TEMP\OCL4008T5.cl", line 429: error: expected an expression
+  	float shade2 = dot(input->normal,half);
+
+---------------------------------------------------------------------------------------------------------------------------------
+
 MANDELBULBER 1.21-1
 
 project leader: Krzysztof Marczak
