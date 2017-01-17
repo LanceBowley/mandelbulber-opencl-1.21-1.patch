@@ -2597,7 +2597,7 @@ void CreateInterface(sParamRender *default_settings)
 	gtk_container_add(GTK_CONTAINER(Interface.frStereo), Interface.boxStereoscopic);
 
 	gtk_box_pack_start(GTK_BOX(Interface.boxStereoscopic), Interface.boxStereoParams, false, false, 1);
-	gtk_box_pack_start(GTK_BOX(Interface.boxStereoParams), CreateEdit("0,1", "Distance between eyes:", 20, Interface.edit_stereoDistance), false, false, 1);
+	gtk_box_pack_start(GTK_BOX(Interface.boxStereoParams), CreateEdit("0,1", "Scale relative eye offset:", 20, Interface.edit_stereoDistance), false, false, 1);
 	gtk_box_pack_start(GTK_BOX(Interface.boxStereoParams), Interface.checkStereoEnabled, false, false, 1);
 
 	//frame Image saving
