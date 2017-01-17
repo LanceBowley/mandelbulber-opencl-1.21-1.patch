@@ -2379,7 +2379,7 @@ void MainRender(void)
 					mRotForEyes.RotateZ(fractParam.doubles.alpha);
 					mRotForEyes.RotateX(fractParam.doubles.beta);
 					mRotForEyes.RotateY(fractParam.doubles.gamma);
-					CVector3 baseVectorForEyes(0.5 * fractParam.doubles.stereoEyeDistance, 0, 0);
+					CVector3 baseVectorForEyes(0.5 * fractParam.doubles.stereoEyeDistance, 0, 0); //TEST
 					eyeLeft = fractParam.doubles.vp - mRotForEyes.RotateVector(baseVectorForEyes);
 					eyeRight = fractParam.doubles.vp + mRotForEyes.RotateVector(baseVectorForEyes);
 					numberOfEyes = 2;
