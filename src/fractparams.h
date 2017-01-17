@@ -35,7 +35,7 @@ struct sParamRenderD
 	double auxLightDistributionRadius;
 	double auxLightVisibility;
 	double auxLightPreIntensity[4];
-	double stereoEyeDistance;
+	double scaleRelativeEyeDistance;
 	double viewDistanceMin;
 	double viewDistanceMax;
 	double volumetricLightIntensity[5];

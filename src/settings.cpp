@@ -350,7 +350,7 @@ void SaveSettings(const char *filename, const sParamRender& params, bool compare
 
 	fprintfInt(fileSettings, "fish_eye", params.perspectiveType, false, compare);
 	fprintfInt(fileSettings, "fish_eye_180cut", params.fishEyeCut, false, compare);
-	fprintfDot(fileSettings, "stereo_eye_distance", params.doubles.stereoEyeDistance, 0.1, compare);
+	fprintfDot(fileSettings, "stereo_eye_distance", params.doubles.scaleRelativeEyeDistance, 0.1, compare);
 	fprintfInt(fileSettings, "stereo_enabled", params.stereoEnabled, false, compare);
 
 	if (!compare || params.fractal.formula == tglad || params.fractal.formula == smoothMandelbox || params.fractal.formula == mandelboxVaryScale4D || params.fractal.formula == generalizedFoldBox || params.fractal.formula == hybrid || params.fractal.formula == ocl_custom)
@@ -943,7 +943,7 @@ bool LoadOneSetting(const char* str1, const char *str2, sParamRender &params, bo
 	else if (!strcmp(str1, "fish_eye_180cut")) params.fishEyeCut = atoi(str2);
 
 	else if (!strcmp(str1, "stereo_enabled")) params.stereoEnabled = atoi(str2);
-	else if (!strcmp(str1, "stereo_eye_distance")) params.doubles.stereoEyeDistance = atof2(str2);
+	else if (!strcmp(str1, "stereo_eye_distance")) params.doubles.scaleRelativeEyeDistance = atof2(str2);
 
 	else if (!strcmp(str1, "mandelbox_scale")) params.fractal.mandelbox.doubles.scale = atof2(str2);
 	else if (!strcmp(str1, "mandelbox_folding_limit")) params.fractal.mandelbox.doubles.foldingLimit = atof2(str2);
