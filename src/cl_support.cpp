@@ -271,7 +271,7 @@ void CclSupport::InitFractal(void)
 
 	std::string strFileEngine = clDir;
 	// int engineNumber = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLEngine));
-	engineNumber = 2;
+	int engineNumber = 2;
 	if		 (engineNumber == 0) 	strFileEngine += "cl_engine_fast.cl";
 	else if(engineNumber == 1)	strFileEngine += "cl_engine.cl";
 	else if(engineNumber == 2)	strFileEngine += "cl_engine_full.cl";
@@ -415,7 +415,7 @@ void CclSupport::InitFractal(void)
 	if(!checkErr(err, "Program::build()"))
 	{
 		// GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(window_interface), GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
-				"Program build log:");
+		//		"Program build log:");
 		// GtkWidget *messageArea = gtk_message_dialog_get_message_area(GTK_MESSAGE_DIALOG(dialog));
 
 		// GtkTextBuffer *textBuffer = gtk_text_buffer_new(NULL);
@@ -505,7 +505,7 @@ void CclSupport::SetParams(sClInBuff *inBuff, sClInConstants *inConstants, enumF
 	if(inConstants->params.DOFmethod != lastParams.DOFmethod) recompileRequest = true;
 
 	// int engineNumber = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLEngine));
-	engineNumber = 2;
+	int engineNumber = 2;
 	if(engineNumber != lastEngineNumber) recompileRequest = true;
 	lastEngineNumber = engineNumber;
 
@@ -1489,7 +1489,7 @@ void CCustomFormulas::NewFormula(std::string newName)
 #else
 	if(!fork())
 	{
-		execlp(editor, editor, formulaFile.c_str(), NULL);
+		// execlp(editor, editor, formulaFile.c_str(), NULL);
 		_exit(0);
 	}
 #endif
@@ -1499,7 +1499,7 @@ void CCustomFormulas::NewFormula(std::string newName)
 #else
 	if(!fork())
 	{
-		execlp(editor, editor, formulaInitFile.c_str(), NULL);
+		// execlp(editor, editor, formulaInitFile.c_str(), NULL);
 		_exit(0);
 	}
 #endif
