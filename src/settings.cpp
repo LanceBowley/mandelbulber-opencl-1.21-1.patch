@@ -1095,7 +1095,9 @@ bool LoadOneSetting(const char* str1, const char *str2, sParamRender &params, bo
 	else if (!strcmp(str1, "opencl_enabled")) // LANCE
     {
 #ifdef CLSUPPORT
-        clSupport->SetSize(atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageWidth))), atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageHeight))));
+        // previously
+        clSupport->SetSize(params.image_width, params.image_height);
+        // clSupport->SetSize(params., atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageHeight))));
         clSupport->InitDevice();
         clSupport->InitFractal();
         if(clSupport->IsReady())
