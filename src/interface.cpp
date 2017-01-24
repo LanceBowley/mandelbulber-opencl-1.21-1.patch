@@ -1218,7 +1218,7 @@ void CreateInterface(sParamRender *default_settings)
 	gtk_window_set_title(GTK_WINDOW(renderWindow.window), "Mandelbulber Render Window");
 	CONNECT_SIGNAL(renderWindow.window, StopRenderingAndQuit, "delete_event");
 	gtk_widget_add_events(GTK_WIDGET(renderWindow.window), GDK_CONFIGURE);
-  CONNECT_SIGNAL(renderWindow.window, WindowReconfigured, "configure-event");
+    CONNECT_SIGNAL(renderWindow.window, WindowReconfigured, "configure-event");
 
 	//glowny box w oknie
 	renderWindow.mainBox = gtk_vbox_new(FALSE, 0);
@@ -3207,10 +3207,10 @@ void CreateInterface(sParamRender *default_settings)
 		printf("Will be used default settings\n");
 	}
 
-  g_timeout_add (100,(GSourceFunc)CallerTimerLoop,NULL);
-  g_timeout_add (100,(GSourceFunc)CallerTimerLoopWindowRefresh,NULL);
+    g_timeout_add (100,(GSourceFunc)CallerTimerLoop,NULL);
+    g_timeout_add (100,(GSourceFunc)CallerTimerLoopWindowRefresh,NULL);
 
-  clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
+    clipboard = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
 
 	gdk_threads_enter();
 	gtk_main();
