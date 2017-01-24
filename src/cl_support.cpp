@@ -115,9 +115,9 @@ bool CclSupport::checkErr(cl_int err, const char * name)
 		std::string errorMessage;
 		errorMessage = errorMessageStream.str();
 		std::cerr << errorMessage << std::endl;
-		GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(window_interface), GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK, errorMessage.c_str());
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
+		// GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(window_interface), GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK, errorMessage.c_str());
+		// gtk_dialog_run(GTK_DIALOG(dialog));
+		// gtk_widget_destroy(dialog);
 		ready = false;
 		enabled = false;
 		recompileRequest = true;
@@ -127,7 +127,7 @@ bool CclSupport::checkErr(cl_int err, const char * name)
 #else
 		chdir(data_directory);
 #endif
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(Interface.checkOpenClEnable), false);
+		// gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(Interface.checkOpenClEnable), false);
 		return false;
 	}
 	else
@@ -151,7 +151,7 @@ void CclSupport::InitDevice(void)
 	if(platformIndex > platformList.size()-1)
 	{
 		platformIndex = platformList.size()-1;
-		gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLPlatformIndex), platformIndex);
+		// gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLPlatformIndex), platformIndex);
 	}
 
 	platformList[platformIndex].getInfo((cl_platform_info) CL_PLATFORM_VENDOR, &platformVendor);
@@ -183,7 +183,7 @@ void CclSupport::InitDevice(void)
 	if(deviceIndex > devices.size()-1)
 	{
 		deviceIndex = devices.size()-1;
-		gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLDeviceIndex), deviceIndex);
+		// gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLDeviceIndex), deviceIndex);
 	}
 
 	if(!checkErr(devices.size() > 0 ? CL_SUCCESS : -1, "devices.size() > 0")) return;
@@ -213,13 +213,13 @@ void CclSupport::InitDevice(void)
 
 	char text[1000];
 	sprintf(text,"OpenCL platform by: %s", platformVendor.c_str());
-	gtk_label_set_text(GTK_LABEL(Interface.label_OpenClPlatformBy), text);
+	// gtk_label_set_text(GTK_LABEL(Interface.label_OpenClPlatformBy), text);
 	sprintf(text,"GPU frequency: %d MHz", maxClockFrequency);
-	gtk_label_set_text(GTK_LABEL(Interface.label_OpenClMaxClock), text);
+	// gtk_label_set_text(GTK_LABEL(Interface.label_OpenClMaxClock), text);
 	sprintf(text,"GPU memory: %ld MB", memorySize/1024/1024);
-	gtk_label_set_text(GTK_LABEL(Interface.label_OpenClMemorySize), text);
+	// gtk_label_set_text(GTK_LABEL(Interface.label_OpenClMemorySize), text);
 	sprintf(text,"Number of computing units: %d", numberOfComputeUnits);
-	gtk_label_set_text(GTK_LABEL(Interface.label_OpenClComputingUnits), text);
+	// gtk_label_set_text(GTK_LABEL(Interface.label_OpenClComputingUnits), text);
 
 	clDir = std::string(sharedDir) + "cl/";
 }
@@ -233,20 +233,24 @@ void CclSupport::InitFractal(void)
 
 	char progressText[1000];
 	sprintf(progressText, "OpenCL - initialization");
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 0.0);
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
+	// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 0.0);
+	/*while (gtk_events_pending())
+		gtk_main_iteration();*/
 
 	if(!customFormulas)
 	{
 		customFormulas = new CCustomFormulas(data_directory);
 	}
 
-	useCPU = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLGPUCPU));
-	deviceIndex = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLDeviceIndex));
-	platformIndex = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLPlatformIndex));
-	memoryLimitByUser = atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLMaxMem))) * 1024 * 1024;
+	// useCPU = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLGPUCPU));
+	useCPU = 0;
+	// deviceIndex = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLDeviceIndex));
+	deviceIndex = 0;
+	// platformIndex = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLPlatformIndex));
+	platformIndex = 0;
+	// memoryLimitByUser = atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLMaxMem))) * 1024 * 1024;
+	memoryLimitByUser = 256 * 1024 * 1024;
 
 	std::string strFormula = "mandelbulb";
 
@@ -266,7 +270,8 @@ void CclSupport::InitFractal(void)
 	if(lastFormula == xenodreambuie) strFormula = "xenodreambuie";
 
 	std::string strFileEngine = clDir;
-	int engineNumber = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLEngine));
+	// int engineNumber = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLEngine));
+	engineNumber = 2;
 	if		 (engineNumber == 0) 	strFileEngine += "cl_engine_fast.cl";
 	else if(engineNumber == 1)	strFileEngine += "cl_engine.cl";
 	else if(engineNumber == 2)	strFileEngine += "cl_engine_full.cl";
@@ -409,20 +414,20 @@ void CclSupport::InitFractal(void)
 
 	if(!checkErr(err, "Program::build()"))
 	{
-		GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(window_interface), GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
+		// GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(window_interface), GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
 				"Program build log:");
-		GtkWidget *messageArea = gtk_message_dialog_get_message_area(GTK_MESSAGE_DIALOG(dialog));
+		// GtkWidget *messageArea = gtk_message_dialog_get_message_area(GTK_MESSAGE_DIALOG(dialog));
 
-		GtkTextBuffer *textBuffer = gtk_text_buffer_new(NULL);
-		gtk_text_buffer_set_text(textBuffer, buildLogText.c_str(), buildLogText.length());
+		// GtkTextBuffer *textBuffer = gtk_text_buffer_new(NULL);
+		// gtk_text_buffer_set_text(textBuffer, buildLogText.c_str(), buildLogText.length());
 
-		GtkWidget *textView = gtk_text_view_new_with_buffer(textBuffer);
-		gtk_box_pack_start(GTK_BOX(messageArea), textView, false, false, 1);
-		gtk_widget_show(textView);
+		// GtkWidget *textView = gtk_text_view_new_with_buffer(textBuffer);
+		// gtk_box_pack_start(GTK_BOX(messageArea), textView, false, false, 1);
+		// gtk_widget_show(textView);
 
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
-		return;
+		// gtk_dialog_run(GTK_DIALOG(dialog));
+		// gtk_widget_destroy(dialog);
+		// return;
 	}
 
 	printf("OpenCL program built done\n");
@@ -468,13 +473,13 @@ void CclSupport::InitFractal(void)
 	printf("OpenCL command queue prepared\n");
 
 	sprintf(progressText, "OpenCL - ready");
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
+	// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
+	// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
 
 	sprintf(text,"Max workgroup size: %d", maxMaxWorkGroupSize[0]);
-	gtk_label_set_text(GTK_LABEL(Interface.label_OpenClMaxWorkgroup), text);
+	// gtk_label_set_text(GTK_LABEL(Interface.label_OpenClMaxWorkgroup), text);
 	sprintf(text,"Actual workgroup size: %ld", workGroupSize);
-	gtk_label_set_text(GTK_LABEL(Interface.label_OpenClWorkgroupSize), text);
+	// gtk_label_set_text(GTK_LABEL(Interface.label_OpenClWorkgroupSize), text);
 
 	ready = true;
 }
@@ -499,7 +504,8 @@ void CclSupport::SetParams(sClInBuff *inBuff, sClInConstants *inConstants, enumF
 	if(inConstants->params.texturedBackground != lastParams.texturedBackground) recompileRequest = true;
 	if(inConstants->params.DOFmethod != lastParams.DOFmethod) recompileRequest = true;
 
-	int engineNumber = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLEngine));
+	// int engineNumber = gtk_combo_box_get_active(GTK_COMBO_BOX(Interface.comboOpenCLEngine));
+	engineNumber = 2;
 	if(engineNumber != lastEngineNumber) recompileRequest = true;
 	lastEngineNumber = engineNumber;
 
@@ -579,7 +585,8 @@ void CclSupport::Render(cImage *image, GtkWidget *outputDarea)
 				if(auxReflectBuffer) delete auxReflectBuffer; auxReflectBuffer = NULL;
 				if(reflectBuffer) delete[] reflectBuffer; reflectBuffer = NULL;
 
-				double processingCycleTime = atof(gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLProcessingCycleTime)));
+				// double processingCycleTime = atof(gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLProcessingCycleTime)));
+				double processingCycleTime = 1;
 				if (processingCycleTime < 0.02) processingCycleTime = 0.02;
 
 				workGroupSizeMultiplier *= processingCycleTime / lastProcessingTime;
@@ -701,8 +708,8 @@ void CclSupport::Render(cImage *image, GtkWidget *outputDarea)
 				int time_h = time / 3600;
 				sprintf(progressText, "OpenCL - rendering. Done %.1f%%, to go %dh%dm%ds, elapsed %dh%dm%ds, used GPU mem %ld MB", percent * 100.0, togo_time_h, togo_time_min, togo_time_s,
 						time_h, time_min, time_s, usedGPUdMem / 1024 / 1024);
-				gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
-				gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), percent);
+				// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
+				// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), percent);
 
 				lastProcessingTime = time - lastTimeProcessing;
 				lastTimeProcessing = time;
@@ -715,16 +722,16 @@ void CclSupport::Render(cImage *image, GtkWidget *outputDarea)
 						image->ConvertTo8bit();
 						image->UpdatePreview();
 						image->RedrawInWidget(outputDarea);
-						while (gtk_events_pending())
-							gtk_main_iteration();
+						/*while (gtk_events_pending())
+							gtk_main_iteration();*/
 					}
 					lastTime = real_clock();
 				}
 
 				if (programClosed) break;
 
-				while (gtk_events_pending())
-					gtk_main_iteration();
+				/*while (gtk_events_pending())
+					gtk_main_iteration();*/
 			}
 			if (programClosed) break;
 		}
@@ -903,10 +910,10 @@ void CclSupport::SSAORender(cImage *image, GtkWidget *outputDarea)
 
 	char progressText[1000];
 	sprintf(progressText, "Rendering Screen Space Ambient Occlussion with OpenCL");
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
+	// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
+	/*while (gtk_events_pending())
+		gtk_main_iteration();*/
 
 	float *zBuffer = image->GetZBufferPtr();
 	size_t zBufferSize = image->GetZBufferSize();
@@ -989,7 +996,8 @@ void CclSupport::SSAORender(cImage *image, GtkWidget *outputDarea)
 
 	for (int pixelIndex = 0; pixelIndex < width * height; pixelIndex += stepSize)
 	{
-		double processingCycleTime = atof(gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLProcessingCycleTime)));
+		// double processingCycleTime = atof(gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLProcessingCycleTime)));
+		double processingCycleTime = 1;
 		if (processingCycleTime < 0.02) processingCycleTime = 0.02;
 
 		double factor = processingCycleTime / lastProcessingTime;
@@ -1041,13 +1049,13 @@ void CclSupport::SSAORender(cImage *image, GtkWidget *outputDarea)
 		int time_h = time / 3600;
 		sprintf(progressText, "SSAO OpenCL - rendering. Done %.1f%%, to go %dh%dm%ds, elapsed %dh%dm%ds", percent * 100.0, togo_time_h, togo_time_min, togo_time_s, time_h, time_min,
 				time_s);
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), percent);
+		// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
+		// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), percent);
 
 		if (programClosed) break;
 
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		/*while (gtk_events_pending())
+			gtk_main_iteration();*/
 
 		lastProcessingTime = time - lastTimeProcessing;
 		lastTimeProcessing = time;
@@ -1067,10 +1075,10 @@ void CclSupport::SSAORender(cImage *image, GtkWidget *outputDarea)
 	}
 
 	sprintf(progressText, "Rendering Screen Space Ambient Occlussion done");
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
+	// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
+	/*while (gtk_events_pending())
+		gtk_main_iteration();*/
 
 	delete zBufferCl;
 	delete[] imageBuffer;
@@ -1109,10 +1117,10 @@ void CclSupport::DOFRender(cImage *image, GtkWidget *outputDarea)
 
 	if (!noGUI && image->IsPreview())
 	{
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), "Rendering Depth Of Field effect. Sorting zBuffer");
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 0.0);
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), "Rendering Depth Of Field effect. Sorting zBuffer");
+		// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 0.0);
+		/*while (gtk_events_pending())
+			gtk_main_iteration();*/
 	}
 
 	//------------ CPU part --------------
@@ -1121,9 +1129,9 @@ void CclSupport::DOFRender(cImage *image, GtkWidget *outputDarea)
 
 	if (!noGUI && image->IsPreview())
 	{
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), "Rendering Depth Of Field effect. Randomizing zBuffer");
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), "Rendering Depth Of Field effect. Randomizing zBuffer");
+		/*while (gtk_events_pending())
+			gtk_main_iteration();*/
 	}
 
 	//Randomize Z-buffer
@@ -1186,10 +1194,10 @@ void CclSupport::DOFRender(cImage *image, GtkWidget *outputDarea)
 
 	//------------------ GPU part ------------------
 
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), "Rendering Depth Of Field effect with OpenCL");
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 0.0);
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), "Rendering Depth Of Field effect with OpenCL");
+	// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 0.0);
+	/*while (gtk_events_pending())
+		gtk_main_iteration();*/
 
 	size_t usedMemForDOF = (imageSize + imageSize + sizeof(sSortZ<cl_float>) * width * height) / 1024 / 1024;
 	printf("GPU memory for DOF effect: %ld MB\n", usedMemForDOF);
@@ -1246,7 +1254,8 @@ void CclSupport::DOFRender(cImage *image, GtkWidget *outputDarea)
 
 	for (int pixelIndex = 0; pixelIndex < width * height; pixelIndex += stepSize)
 	{
-		double processingCycleTime = atof(gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLProcessingCycleTime)));
+		// double processingCycleTime = atof(gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLProcessingCycleTime)));
+		double processingCycleTime = 1;
 		if (processingCycleTime < 0.02) processingCycleTime = 0.02;
 
 		double factor = processingCycleTime / lastProcessingTime;
@@ -1299,8 +1308,8 @@ void CclSupport::DOFRender(cImage *image, GtkWidget *outputDarea)
 		int time_h = time / 3600;
 		sprintf(progressText, "DOF OpenCL - rendering. Done %.1f%%, to go %dh%dm%ds, elapsed %dh%dm%ds", percent * 100.0, togo_time_h, togo_time_min, togo_time_s, time_h, time_min,
 				time_s);
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), percent);
+		// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
+		// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), percent);
 
 		if (programClosed) break;
 
@@ -1323,14 +1332,14 @@ void CclSupport::DOFRender(cImage *image, GtkWidget *outputDarea)
 				image->ConvertTo8bit();
 				image->UpdatePreview();
 				image->RedrawInWidget(outputDarea);
-				while (gtk_events_pending())
-					gtk_main_iteration();
+				/*while (gtk_events_pending())
+					gtk_main_iteration();*/
 			}
 			lastTime = real_clock();
 		}
 
-		while (gtk_events_pending())
-			gtk_main_iteration();
+		/*while (gtk_events_pending())
+			gtk_main_iteration();*/
 
 		lastProcessingTime = time - lastTimeProcessing;
 		lastTimeProcessing = time;
@@ -1358,8 +1367,8 @@ void CclSupport::DOFRender(cImage *image, GtkWidget *outputDarea)
 		image16[i] = pixel;
 	}
 
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), "Rendering Depth Of Field effect done");
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
+	// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), "Rendering Depth Of Field effect done");
+	// gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
 
 	delete[] in_image;
 	delete[] out_image;
@@ -1401,14 +1410,14 @@ void CCustomFormulas::RefreshList(void)
 	GError *error = NULL;
 	GDir *dir = g_dir_open(customFormulasPath.c_str(), 0, &error);
 
-	gtk_list_store_clear(GTK_LIST_STORE(gtk_combo_box_get_model (GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas))));
+	// gtk_list_store_clear(GTK_LIST_STORE(gtk_combo_box_get_model (GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas))));
 
 	/*
 	if(count > 0)
 	{
 		for(int i = count -1; count >=0; count--)
 		{
-			gtk_combo_box_remove_text(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), i);
+			// gtk_combo_box_remove_text(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), i);
 		}
 	}
 */
@@ -1431,7 +1440,7 @@ void CCustomFormulas::RefreshList(void)
 					std::string name;
 					name = sFilename.substr(3, sFilename.length()-3-2);
 					listOfNames.push_back(name);
-					gtk_combo_box_append_text(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), name.c_str());
+					// gtk_combo_box_append_text(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), name.c_str());
 					count++;
 				}
 			}
@@ -1441,7 +1450,7 @@ void CCustomFormulas::RefreshList(void)
 
 	if(count > 0)
 	{
-		gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), indexTemp);
+		// gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), indexTemp);
 		actualIndex = indexTemp;
 	}
 
@@ -1474,7 +1483,7 @@ void CCustomFormulas::NewFormula(std::string newName)
 
 	SetActualByName(newName);
 
-	const char *editor = gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLTextEditor));
+	// const char *editor = gtk_entry_get_text(GTK_ENTRY(Interface.edit_OpenCLTextEditor));
 #ifdef WIN32
 	spawnlp(P_NOWAIT, editor, editor, formulaFile.c_str(), NULL);
 #else
@@ -1503,7 +1512,7 @@ bool CCustomFormulas::SetActualByName(std::string name)
 	{
 		if (name == listOfNames[i])
 		{
-			gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), i);
+			// gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), i);
 			actualIndex = i;
 			result = true;
 		}
@@ -1519,6 +1528,6 @@ void CCustomFormulas::DeleteFormula(void)
 	remove(actualIni.c_str());
 	RefreshList();
 	actualIndex = 0;
-	gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), actualIndex);
+	// gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), actualIndex);
 }
 #endif
