@@ -1716,7 +1716,7 @@ int main(int argc, char *argv[])
 		WriteLog("Undo buffer status loaded");
 
 		//reading default configuration in GUI mode
-		if (!noGUI)
+		if (!noGUI) // GUI mode
 		{
 			if (LoadSettings((string(sharedDir)+"examples/default.fract").c_str(), fractParamDefault))
 			{
@@ -1741,9 +1741,9 @@ int main(int argc, char *argv[])
 		else
 		{
 		  g_type_init();
-			if(!noGUIdata.netrenderMode)
+			if(!noGUIdata.netrenderMode) // No gui sans net render
 			{
-				if (!noGUIsettingsLoaded)
+				if (!noGUIsettingsLoaded) // Loads default settings if no settings are provided at the command line
 				{
 					char settingsFile2[1000];
 					sprintf(settingsFile2, "settings/%s", noGUIdata.settingsFile);
@@ -1753,7 +1753,7 @@ int main(int argc, char *argv[])
 						return -1;
 					}
 				}
-				WriteLog("Default settings loaded");
+				WriteLog("Default settings loaded"); // Regardless of settings file provided, the following are static
 				Interface_data.animMode = noGUIdata.animMode;
 				Interface_data.playMode = noGUIdata.playMode;
 				Interface_data.recordMode = false;
@@ -1941,7 +1941,7 @@ bool LoadTextures(sParamRender *params)
 	return true;
 }
 
-//****************************8 MAIN called by "Render" button
+//**************************** MAIN called by "Render" button
 void MainRender(void)
 {
 	isRendering = true;
@@ -2354,6 +2354,7 @@ void MainRender(void)
 				//renderowanie fraktala
 				//if ((index % frame_step == 0) || record_mode)
 
+
 				if (fractParam.animMode)
 				{
 					distance = CalculateDistance(fractParam.doubles.vp, fractParam.fractal);
@@ -2379,12 +2380,15 @@ void MainRender(void)
 					mRotForEyes.RotateZ(fractParam.doubles.alpha);
 					mRotForEyes.RotateX(fractParam.doubles.beta);
 					mRotForEyes.RotateY(fractParam.doubles.gamma);
-					/* Edit Jan 16 2017
-					CVector3 baseVectorForEyes(0.5 * fractParam.doubles.stereoEyeDistance, 0, 0); //TEST
-					*/
-					double eyeDistance = distance*fractParam.doubles.scaleRelativeEyeDistance;
-					CVector3 baseVectorForEyes(0.5 * eyeDistance, 0, 0);
-					// End edit
+
+                    // LANCE
+					// CVector3 baseVectorForEyes(0.5 * fractParam.doubles.scaleRelativeEyeDistance, 0, 0); // Previously
+                    distance = CalculateDistance(fractParam.doubles.vp, fractParam.fractal);
+                    double eyeDistance = distance*fractParam.doubles.scaleRelativeEyeDistance;
+                    // sprintf(label_text, "Distance to fractal: %g, Stereo distance: %g", distance, eyeDistance);
+                    // gtk_label_set_text(GTK_LABEL(Interface.label_NavigatorEstimatedDistance), label_text);
+
+                    CVector3 baseVectorForEyes(0.5 * eyeDistance, 0, 0);
 					eyeLeft = fractParam.doubles.vp - mRotForEyes.RotateVector(baseVectorForEyes);
 					eyeRight = fractParam.doubles.vp + mRotForEyes.RotateVector(baseVectorForEyes);
 					numberOfEyes = 2;
