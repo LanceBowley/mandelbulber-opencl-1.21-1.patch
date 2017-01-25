@@ -1944,6 +1944,17 @@ bool LoadTextures(sParamRender *params)
 //**************************** MAIN called by "Render" button
 void MainRender(void)
 {
+#ifdef CLSUPPORT
+    clSupport->SetSize(atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageWidth))), atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageHeight))));
+	clSupport->InitDevice();
+	clSupport->InitFractal();
+	if(clSupport->IsReady())
+	{
+		clSupport->SSAOPrepare();
+		clSupport->DOFPrepare();
+	}
+	clSupport->Enable();
+#endif
 	isRendering = true;
 	programClosed = false;
 
