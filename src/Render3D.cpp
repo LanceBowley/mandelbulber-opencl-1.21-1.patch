@@ -1944,7 +1944,7 @@ bool LoadTextures(sParamRender *params)
 //**************************** MAIN called by "Render" button
 void MainRender(void)
 {
-/*#ifdef CLSUPPORT
+#ifdef CLSUPPORT
     // clSupport->SetSize(atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageWidth))), atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageHeight))));
     clSupport->SetSize(200, 100);
 	clSupport->InitDevice();
@@ -1955,7 +1955,7 @@ void MainRender(void)
 		clSupport->DOFPrepare();
 	}
 	clSupport->Enable();
-#endif*/
+#endif
 	isRendering = true;
 	programClosed = false;
 
