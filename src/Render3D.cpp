@@ -1945,7 +1945,8 @@ bool LoadTextures(sParamRender *params)
 void MainRender(void)
 {
 #ifdef CLSUPPORT
-    clSupport->SetSize(atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageWidth))), atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageHeight))));
+    // clSupport->SetSize(atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageWidth))), atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageHeight))));
+    clSupport->SetSize(200, 100);
 	clSupport->InitDevice();
 	clSupport->InitFractal();
 	if(clSupport->IsReady())
