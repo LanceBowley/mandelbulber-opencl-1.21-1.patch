@@ -16,7 +16,7 @@
 
 //#define CLSUPPORT
 
-#ifdef CLSUPPORT
+// #ifdef CLSUPPORT
 
 #ifdef WIN32
 #include "clew.h"
