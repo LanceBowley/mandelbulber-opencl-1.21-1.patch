@@ -1667,4 +1667,4 @@ void CCustomFormulas::DeleteFormula(void)
 		gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLCustomFormulas), actualIndex);
 	}
 }
-// #endif
+#endif
