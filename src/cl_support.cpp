@@ -242,12 +242,12 @@ void CclSupport::InitFractal(void)
 {
 	cl_int err;
 	char text[1000];
-
 	ready = false;
+	char progressText[1000];
 
     if(!noGUI)
     {
-        char progressText[1000];
+
         sprintf(progressText, "OpenCL - initialization");
         gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 0.0);
@@ -1390,9 +1390,9 @@ void CclSupport::DOFRender(cImage *image, GtkWidget *outputDarea)
 		err = queueDOF->finish();
 		if (!checkErr(err, "ComamndQueueSSAO::finish() - Kernel")) return;
 
+		double time = real_clock() - startTime;
 		if(!noGUI)
 		{
-			double time = real_clock() - startTime;
 			char progressText[1000];
 			double percent;
 			percent = (double) (pixelIndex + stepSize) / (width * height);
