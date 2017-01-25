@@ -1946,7 +1946,7 @@ void MainRender(void)
 {
 #ifdef CLSUPPORT
     // clSupport->SetSize(atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageWidth))), atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageHeight))));
-    clSupport->SetSize(200, 100);
+    clSupport->SetSize(2160, 1080);
 	clSupport->InitDevice();
 	clSupport->InitFractal();
 	if(clSupport->IsReady())
