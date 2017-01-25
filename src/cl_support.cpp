@@ -1109,9 +1109,9 @@ void CclSupport::SSAORender(cImage *image, GtkWidget *outputDarea)
 		err = queueSSAO->finish();
 		if (!checkErr(err, "ComamndQueueSSAO::finish() - Kernel")) return;
 
+		double time = real_clock() - startTime;
 		if (!noGUI)
 		{
-			double time = real_clock() - startTime;
 			char progressText[1000];
 			double percent;
 			percent = (double) (pixelIndex + stepSize) / (width * height);
