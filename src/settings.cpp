@@ -1092,23 +1092,6 @@ bool LoadOneSetting(const char* str1, const char *str2, sParamRender &params, bo
 	else if (!strcmp(str1, "file_lightmap")) strcpy(params.file_lightmap, str2);
 	else if (!strcmp(str1, "file_animation_path")) strcpy(params.file_path, str2);
 	else if (!strcmp(str1, "file_keyframes")) strcpy(params.file_keyframes, str2);
-	else if (!strcmp(str1, "opencl_enabled")) // LANCE
-    {
-#ifdef CLSUPPORT
-        // previously
-        clSupport->SetSize(params.image_width, params.image_height);
-        // clSupport->SetSize(params., atoi(gtk_entry_get_text(GTK_ENTRY(Interface.edit_imageHeight))));
-        clSupport->InitDevice();
-        clSupport->InitFractal();
-        if(clSupport->IsReady())
-        {
-            clSupport->SSAOPrepare();
-            clSupport->DOFPrepare();
-        }
-        clSupport->Enable();
-#endif CLSUPPORT
-    }
-    else if (!strcmp(str1, "opencl_engine")) params.OpenCLEngine = atoi(str2);// END LANCE
 	else if (!strcmp(str1, "palette")) GetPaletteFromString(params.palette, str2);
 	else
 	{
