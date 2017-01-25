@@ -27,7 +27,7 @@
 #endif
 
 CclSupport *clSupport;
-// #ifdef CLSUPPORT
+#ifdef CLSUPPORT
 
 struct sClParamsSSAO
 {
