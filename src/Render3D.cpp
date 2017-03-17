@@ -718,6 +718,7 @@ void Render(sParamRender param, cImage *image, GtkWidget *outputDarea)
 
 	if (!clSupport->IsReady())
 	{
+        WriteLog("No cl support");
 		//turn off refreshing if resolution is very low
 		bool bo_refreshing = true;
 
