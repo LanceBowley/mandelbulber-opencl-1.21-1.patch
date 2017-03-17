@@ -1160,6 +1160,7 @@ void Render(sParamRender param, cImage *image, GtkWidget *outputDarea)
 	}
 	else
 	{
+        WriteLog("cl support");
 #ifdef CLSUPPORT
 		printf("OpenCL rendering\n");
 		clSupport->SetSize(image->GetWidth(), image->GetHeight());
