@@ -1664,7 +1664,7 @@ int main(int argc, char *argv[])
 	}
 
 #ifdef CLSUPPORT
-	//create and copy of example custom formulas
+    //create and copy of example custom formulas
 	string oclDir = string(data_directory) + "/custom_ocl_formulas";
 	dir = opendir(oclDir.c_str());
 	if (dir != NULL) (void) closedir(dir);
@@ -2447,7 +2447,7 @@ void MainRender(void)
 						{
 							char progressText[1000];
 							sprintf(progressText, "Stereoscopic image was saved to: %s", filename2.c_str());
-							gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
+							// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
 							StereoPreview(&mainImage, stereoImage);
 						}
 					}
