@@ -158,7 +158,7 @@ void CclSupport::InitDevice(void)
 		platformIndex = platformList.size()-1;
         if (!noGUI)
         {
-            gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLPlatformIndex), platformIndex);
+            // gtk_combo_box_set_active(GTK_COMBO_BOX(Interface.comboOpenCLPlatformIndex), platformIndex);
         }
 	}
 
