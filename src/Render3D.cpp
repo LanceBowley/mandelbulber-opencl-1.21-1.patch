@@ -1235,13 +1235,15 @@ void Render(sParamRender param, cImage *image, GtkWidget *outputDarea)
 		{
 			image->ConvertTo8bit();
 			image->UpdatePreview();
+			/*
 			if(!Interface_data.recordMode)
 			{
 				image->RedrawInWidget(outputDarea);
 			}
 			while (gtk_events_pending())
-				gtk_main_iteration();
+				gtk_main_iteration();*/
 		}
+		/*
 		if (outputDarea != NULL)
 		{
 			char progressText[1000];
@@ -1249,6 +1251,7 @@ void Render(sParamRender param, cImage *image, GtkWidget *outputDarea)
 			gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
 			gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(Interface.progressBar), 1.0);
 		}
+		*/
 
 #endif
 	}
@@ -2435,7 +2438,7 @@ void MainRender(void)
 					}
 					else if (eye == 1)
 					{
-						/*secondEyeImage->ClearImage();
+						secondEyeImage->ClearImage();
 						WriteLog("Image cleared");
 						Render(fractParam, secondEyeImage, renderWindow.drawingArea);
 						WriteLog("Image rendered");
@@ -2451,7 +2454,7 @@ void MainRender(void)
 							sprintf(progressText, "Stereoscopic image was saved to: %s", filename2.c_str());
 							// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
 							StereoPreview(&mainImage, stereoImage);
-						}*/
+						}
 					}
 
 					//save image
