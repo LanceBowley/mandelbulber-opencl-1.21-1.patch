@@ -2435,7 +2435,7 @@ void MainRender(void)
 					}
 					else if (eye == 1)
 					{
-						secondEyeImage->ClearImage();
+						/*secondEyeImage->ClearImage();
 						WriteLog("Image cleared");
 						Render(fractParam, secondEyeImage, renderWindow.drawingArea);
 						WriteLog("Image rendered");
@@ -2451,7 +2451,7 @@ void MainRender(void)
 							sprintf(progressText, "Stereoscopic image was saved to: %s", filename2.c_str());
 							// gtk_progress_bar_set_text(GTK_PROGRESS_BAR(Interface.progressBar), progressText);
 							StereoPreview(&mainImage, stereoImage);
-						}
+						}*/
 					}
 
 					//save image
