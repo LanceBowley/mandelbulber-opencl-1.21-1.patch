@@ -2567,7 +2567,7 @@ void MainRender(void)
 		std::string rightFramePathS = rightFramePath;
 		std::string systemCommand = "mv " + initRightFramePathS + rightFramePathS;
 		appendCommandToQueue(systemCommand.c_str());
-		char leftFramePath[100];
+		char leftFramePath[100];//
 		sprintf(leftFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/images%05d.jpg", frameNumber);
 		std::string leftFramePathS = rightFramePath;
 		systemCommand = "mv " + leftFramePathS + imageDirectory;
