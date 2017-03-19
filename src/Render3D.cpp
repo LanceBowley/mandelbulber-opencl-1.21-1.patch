@@ -2475,7 +2475,7 @@ void MainRender(void)
 					}
 
 					//save image
-					if ((autoSaveImage || fractParam.animMode || tiles > 1) && !programClosed)
+					if ((autoSaveImage || fractParam.animMode || tiles > 1) && !programClosed && eye == 0)
 					{
 						if(tiles>1)
 						{
