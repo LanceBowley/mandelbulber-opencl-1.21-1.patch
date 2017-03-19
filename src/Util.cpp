@@ -5,13 +5,14 @@
 
 std::string Util::getThisDirectory ()
 {
-    std::string dir;
+    /*std::string dir;
     system("bash ./Env.sh");
     std::ifstream envFile;
     envFile.open("EnvVar.txt");
     getline(envFile, dir);
-    system("> EnvVar.txt");
-    return dir;
+    system("> EnvVar.txt");*/
+
+    return "/home/ubuntu/RemoteDesktop/mandelbulber-opencl-1.21-1.patch/src";
 }
 
 void Util::clearFile (std::string fileName)
