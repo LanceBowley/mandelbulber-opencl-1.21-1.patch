@@ -2557,6 +2557,7 @@ void MainRender(void)
 	{
 		std::string imageDirectory = "/home/ubuntu/RemoteDesktop/NewImages/";
         util.appendCommandToQueue("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+        util.runCommandQueue(true);
         util.appendCommandToQueue("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
         util.runCommandQueue(true);
 		int frameNumber = fractParam.fractal.frameNo;
