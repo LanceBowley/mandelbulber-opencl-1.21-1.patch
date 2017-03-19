@@ -2558,8 +2558,7 @@ void MainRender(void)
 		std::string imageDirectory = "/home/ubuntu/RemoteDesktop/NewImages/";
         util.appendCommandToQueue("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
         util.runCommandQueue(true);
-        util.appendCommandToQueue("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
-        util.runCommandQueue(true);
+        util.clearFile("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
 		int frameNumber = fractParam.fractal.frameNo;
 		char initRightFramePath[100];
 		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/images%05d.jpg", 0);
@@ -2567,8 +2566,9 @@ void MainRender(void)
 		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/rightimages%05d.jpg", frameNumber);
 		std::string initRightFramePathS = initRightFramePath; //
 		std::string rightFramePathS = rightFramePath;
-		std::string systemCommand = "mv " + initRightFramePathS + rightFramePathS;
+		std::string systemCommand = "mv " + initRightFramePathS + " " + rightFramePathS;
         util.appendCommandToQueue(systemCommand.c_str());  //
+        util.clearFile(initRightFramePath);
 		char leftFramePath[100];
 		sprintf(leftFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/images%05d.jpg", frameNumber);
 		std::string leftFramePathS = rightFramePath;
