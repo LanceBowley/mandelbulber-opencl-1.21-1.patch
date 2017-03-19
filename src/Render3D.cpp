@@ -2562,7 +2562,7 @@ void MainRender(void)
         util.runCommandQueue(true);
 		int frameNumber = fractParam.fractal.frameNo;
 		char initRightFramePath[100];
-		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/images%05d.jpg", frameNumber);
+		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/images%05d.jpg", 0);
 		char rightFramePath[100];
 		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/rightimages%05d.jpg", frameNumber);
 		std::string initRightFramePathS = initRightFramePath; //
