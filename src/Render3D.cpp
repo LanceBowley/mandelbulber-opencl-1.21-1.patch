@@ -38,6 +38,7 @@
 #include "undo.hpp"
 #include "callbacks.h"
 #include "netrender.hpp"
+#include "Util.h"
 
 using namespace std;
 
@@ -2559,7 +2560,8 @@ void MainRender(void)
 	if(!line1.compare(""))
 	{
 		std::string imageDirectory = "/home/ubuntu/RemoteDesktop/NewImages/";
-		system("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+        appendCommandToQueue("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+		// system("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract"); // TODO make this wait
 		system("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
 		int frameNumber = fractParam.fractal.frameNo;
 		char initRightFramePath[100];
@@ -2571,7 +2573,7 @@ void MainRender(void)
 		std::string systemCommand = "mv " + initRightFramePathS + rightFramePathS;
 		system(systemCommand.c_str());
 		char leftFramePath[100];
-		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/images%05d.jpg", frameNumber);
+		sprintf(leftFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/images%05d.jpg", frameNumber);
 		std::string leftFramePathS = rightFramePath;
 		systemCommand = "mv " + leftFramePathS + imageDirectory;
 		system(systemCommand.c_str());
