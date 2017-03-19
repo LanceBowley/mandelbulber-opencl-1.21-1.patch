@@ -2441,6 +2441,7 @@ void MainRender(void)
 					else if (eye == 1)
 					{
 						fractParam.stereoEnabled = 0;
+						fractParam.fractal.frameNo = 0;
 						strcpy(fractParam.file_destination, "/home/ubuntu/RemoteDesktop/RightImages/images");
 						strcpy(fractParam.file_keyframes, "/home/ubuntu/RemoteDesktop/RightKeys/keyframe");
 						SaveSettings("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract", fractParam, true);
@@ -2553,7 +2554,7 @@ void MainRender(void)
 
     Util util;
 	//// Lance's dumb hack
-	if(!util.fileIsEmpty("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract"))
+	if(fractParam.stereoEnabled)
 	{
 		std::string imageDirectory = "/home/ubuntu/RemoteDesktop/NewImages/";
         util.appendCommandToQueue("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
