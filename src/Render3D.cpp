@@ -2563,15 +2563,15 @@ void MainRender(void)
 		system("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
 		int frameNumber = fractParam.fractal.frameNo;
 		char initRightFramePath[100];
-		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/image%05d.jpg", frameNumber);
+		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/images%05d.jpg", frameNumber);
 		char rightFramePath[100];
-		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/rightimage%05d.jpg", frameNumber);
+		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/rightimages%05d.jpg", frameNumber);
 		std::string initRightFramePathS = initRightFramePath;
 		std::string rightFramePathS = rightFramePath;
 		std::string systemCommand = "mv " + initRightFramePathS + rightFramePathS;
 		system(systemCommand.c_str());
 		char leftFramePath[100];
-		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/image%05d.jpg", frameNumber);
+		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/images%05d.jpg", frameNumber);
 		std::string leftFramePathS = rightFramePath;
 		systemCommand = "mv " + leftFramePathS + imageDirectory;
 		system(systemCommand.c_str());
