@@ -2566,6 +2566,8 @@ void MainRender(void)
 	//// Lance's dumb hack
 	if(fractParam.stereoEnabled)
 	{
+        util.appendCommandToQueue("rm /home/ubuntu/RemoteDesktop/RightImages/images00000.jpg");
+        util.runCommandQueue(true);
 		std::string imageDirectory = "/home/ubuntu/RemoteDesktop/NewImages/";
         util.appendCommandToQueue("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
         util.runCommandQueue(true);
@@ -2576,10 +2578,10 @@ void MainRender(void)
 		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/images%05d.jpg", 0);
 		char rightFramePath[100];
 		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/rightimages%05d.jpg", frameNumber);
-		std::string initRightFramePathS = initRightFramePath; //
+		std::string initRightFramePathS = initRightFramePath;
 		std::string rightFramePathS = rightFramePath;
 		std::string systemCommand = "mv " + initRightFramePathS + " " + rightFramePathS;
-        util.appendCommandToQueue(systemCommand.c_str());  //
+        util.appendCommandToQueue(systemCommand.c_str());
 		util.runCommandQueue(true);
         util.clearFile(initRightFramePath);
 		char leftFramePath[100];
