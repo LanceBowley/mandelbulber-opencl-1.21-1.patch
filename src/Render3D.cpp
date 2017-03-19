@@ -38,7 +38,7 @@
 #include "undo.hpp"
 #include "callbacks.h"
 #include "netrender.hpp"
-#include "Util.h"
+#include "Util.hpp"
 
 using namespace std;
 
@@ -2551,13 +2551,14 @@ void MainRender(void)
 	Interface_data.recordMode = false;
 	isRendering = false;
 
+    Util util;
 	//// Lance's dumb hack
-	if(!fileIsEmpty("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract"))
+	if(!util.fileIsEmpty("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract"))
 	{
 		std::string imageDirectory = "/home/ubuntu/RemoteDesktop/NewImages/";
-        appendCommandToQueue("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
-		appendCommandToQueue("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
-        runCommandQueue(true);
+        util.appendCommandToQueue("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+        util.appendCommandToQueue("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+        util.runCommandQueue(true);
 		int frameNumber = fractParam.fractal.frameNo;
 		char initRightFramePath[100];
 		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/images%05d.jpg", frameNumber);
@@ -2566,15 +2567,15 @@ void MainRender(void)
 		std::string initRightFramePathS = initRightFramePath; //
 		std::string rightFramePathS = rightFramePath;
 		std::string systemCommand = "mv " + initRightFramePathS + rightFramePathS;
-		appendCommandToQueue(systemCommand.c_str());  //
+        util.appendCommandToQueue(systemCommand.c_str());  //
 		char leftFramePath[100];
 		sprintf(leftFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/images%05d.jpg", frameNumber);
 		std::string leftFramePathS = rightFramePath;
 		systemCommand = "mv " + leftFramePathS + imageDirectory;
-		appendCommandToQueue(systemCommand.c_str());
+        util.appendCommandToQueue(systemCommand.c_str());
 		systemCommand = "mv " + rightFramePathS + imageDirectory;
-		appendCommandToQueue(systemCommand.c_str());
-        runCommandQueue(true);
+        util.appendCommandToQueue(systemCommand.c_str());
+        util.runCommandQueue(true);
 	}
 	///
 }

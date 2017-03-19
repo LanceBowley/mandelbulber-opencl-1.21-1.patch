@@ -22,6 +22,7 @@ CPP_SRCS += \
 ../src/timeline.cpp \
 ../src/undo.cpp \
 ../src/cl_support.cpp \
+../src/Util.cpp \
 ../src/netrender.cpp  
 
 OBJS += \
@@ -43,6 +44,7 @@ OBJS += \
 ./src/timeline.o \
 ./src/undo.o \
 ./src/cl_support.o \
+./src/Util.o \
 ./src/netrender.o
 
 CPP_DEPS += \
@@ -64,6 +66,7 @@ CPP_DEPS += \
 ./src/timeline.d \
 ./src/undo.d \
 ./src/cl_support.d \
+./src/Util.d \
 ./src/netrender.d  
 
 
