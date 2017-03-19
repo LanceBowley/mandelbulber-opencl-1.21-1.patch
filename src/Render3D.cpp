@@ -19,7 +19,7 @@
 #endif
 
 #include <cstdio>
-#include <string.h>
+#include <string.h> //
 #include <string>
 #include <cstdlib>
 #include <unistd.h>
