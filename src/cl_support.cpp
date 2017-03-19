@@ -164,6 +164,7 @@ void CclSupport::InitDevice(void)
 
 	platformList[platformIndex].getInfo((cl_platform_info) CL_PLATFORM_VENDOR, &platformVendor);
 	std::cout << "OpenCL Platform is by: " << platformVendor << "\n";
+	WriteLog("OpenCL Platform is by: ");
 	cl_context_properties cprops[3] = { CL_CONTEXT_PLATFORM, (cl_context_properties) (platformList[platformIndex])(), 0 };
 	if(platformVendor.find("NVIDIA") != std::string::npos)
 	{

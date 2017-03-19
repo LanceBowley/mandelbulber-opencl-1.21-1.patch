@@ -26,6 +26,7 @@
 #include <locale.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <fstream>
 
 #include "Render3D.h"
 #include "files.h"
@@ -1161,7 +1162,7 @@ void Render(sParamRender param, cImage *image, GtkWidget *outputDarea)
 	else
 	{
         WriteLog("cl support");
-#ifdef CLSUPPORT
+// #ifdef CLSUPPORT
 		printf("OpenCL rendering\n");
 		clSupport->SetSize(image->GetWidth(), image->GetHeight());
 
@@ -2438,7 +2439,11 @@ void MainRender(void)
 					}
 					else if (eye == 1)
 					{
-						secondEyeImage->ClearImage();
+						fractParam.stereoEnabled = 0;
+						strcpy(fractParam.file_destination, "/home/ubuntu/RemoteDesktop/RightImages/images");
+						strcpy(fractParam.file_keyframes, "/home/ubuntu/RemoteDesktop/RightKeys/keyframe");
+						SaveSettings("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract", fractParam, true);
+						/*secondEyeImage->ClearImage();
 						WriteLog("Image cleared");
 						Render(fractParam, secondEyeImage, renderWindow.drawingArea);
 						WriteLog("Image rendered");
@@ -2447,7 +2452,7 @@ void MainRender(void)
 						if (!noGUI) StereoPreview(&mainImage, stereoImage);
 						filename2 = IndexFilename(fractParam.file_destination, "jpg", index);
 						SaveJPEG(filename2.c_str(), 95, width * 2, height, (JSAMPLE*) stereoImage);
-						WriteLog("Stereo image saved");
+						WriteLog("Stereo image saved");*/
 						if (!noGUI)
 						{
 							char progressText[1000];
@@ -2458,7 +2463,7 @@ void MainRender(void)
 					}
 
 					//save image
-					if ((autoSaveImage || fractParam.animMode || tiles > 1) && !fractParam.stereoEnabled && !programClosed)
+					if ((autoSaveImage || fractParam.animMode || tiles > 1) && !programClosed)
 					{
 						if(tiles>1)
 						{
@@ -2544,6 +2549,36 @@ void MainRender(void)
 	Interface_data.playMode = false;
 	Interface_data.recordMode = false;
 	isRendering = false;
+
+	//// Lance's dumb hack
+	bool empty = false;
+	std::ifstream file;
+	file.open("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+	std::string line1;
+	std::getline(file, line1);
+	if(!line1.compare(""))
+	{
+		std::string imageDirectory = "/home/ubuntu/RemoteDesktop/NewImages/";
+		system("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+		system("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+		int frameNumber = fractParam.fractal.frameNo;
+		char initRightFramePath[100];
+		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/image%05d.jpg", frameNumber);
+		char rightFramePath[100];
+		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/rightimage%05d.jpg", frameNumber);
+		std::string initRightFramePathS = initRightFramePath;
+		std::string rightFramePathS = rightFramePath;
+		std::string systemCommand = "mv " + initRightFramePathS + rightFramePathS;
+		system(systemCommand.c_str());
+		char leftFramePath[100];
+		sprintf(rightFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/image%05d.jpg", frameNumber);
+		std::string leftFramePathS = rightFramePath;
+		systemCommand = "mv " + leftFramePathS + imageDirectory;
+		system(systemCommand.c_str());
+		systemCommand = "mv " + rightFramePathS + imageDirectory;
+		system(systemCommand.c_str());
+	}
+	///
 }
 
 void ThumbnailRender(const char *settingsFile, cImage *miniImage, int mode)
