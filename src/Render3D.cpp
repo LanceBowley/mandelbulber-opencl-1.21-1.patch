@@ -2440,11 +2440,21 @@ void MainRender(void)
 					}
 					else if (eye == 1)
 					{
+						int initFrameNo = fractParam.fractal.frameNo;
+						std::string initFileDestination = fractParam.file_destination;
+						std::string initKeyframeDestiantion = fractParam.file_keyframes;
+
 						fractParam.stereoEnabled = 0;
 						fractParam.fractal.frameNo = 0;
 						strcpy(fractParam.file_destination, "/home/ubuntu/RemoteDesktop/RightImages/images");
 						strcpy(fractParam.file_keyframes, "/home/ubuntu/RemoteDesktop/RightKeys/keyframe");
 						SaveSettings("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract", fractParam, true);
+
+						fractParam.stereoEnabled = 1;
+						fractParam.fractal.frameNo = initFrameNo;
+						strcpy(fractParam.file_destination, initFileDestination);
+						strcpy(fractParam.file_keyframes, initKeyframeDestiantion);
+
 						/*secondEyeImage->ClearImage();
 						WriteLog("Image cleared");
 						Render(fractParam, secondEyeImage, renderWindow.drawingArea);
