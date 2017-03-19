@@ -2566,7 +2566,7 @@ void MainRender(void)
 		std::string initRightFramePathS = initRightFramePath; //
 		std::string rightFramePathS = rightFramePath;
 		std::string systemCommand = "mv " + initRightFramePathS + rightFramePathS;
-		appendCommandToQueue(systemCommand.c_str());
+		appendCommandToQueue(systemCommand.c_str());  //
 		char leftFramePath[100];
 		sprintf(leftFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/images%05d.jpg", frameNumber);
 		std::string leftFramePathS = rightFramePath;
