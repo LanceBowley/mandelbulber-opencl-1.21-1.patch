@@ -13,18 +13,16 @@
 #include <zconf.h>
 #include <vector>
 
-class Util {
-    std::string getThisDirectory();
-    void clearFile (std::string fileName);
-    bool fileIsEmpty (std::string fileName);
-    void log (std::string entry);
-    void sleepSeconds (float seconds);
-    std::vector<std::string> jsonFileToVector (std::string fileName);
-    void runCommandQueue(bool hold = false);
-    void sysExec(std::string command);
-    void appendCommandToQueue(std::string command1);
-    std::vector<std::string> readAllLines(std::string filePath);
-};
+std::string getThisDirectory();
+void clearFile (std::string fileName);
+bool fileIsEmpty (std::string fileName);
+void log (std::string entry);
+void sleepSeconds (float seconds);
+std::vector<std::string> jsonFileToVector (std::string fileName);
+void runCommandQueue(bool hold = false);
+void sysExec(std::string command);
+void appendCommandToQueue(std::string command1);
+std::vector<std::string> readAllLines(std::string filePath);
 
 
 #endif //MANDELBULBER_OPENCL_1_21_1_PATCH_UTIL_H

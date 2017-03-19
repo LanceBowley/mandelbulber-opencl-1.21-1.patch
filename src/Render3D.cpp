@@ -2552,17 +2552,12 @@ void MainRender(void)
 	isRendering = false;
 
 	//// Lance's dumb hack
-	bool empty = false;
-	std::ifstream file;
-	file.open("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
-	std::string line1;
-	std::getline(file, line1);
-	if(!line1.compare(""))
+	if(!fileIsEmpty("/home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract"))
 	{
 		std::string imageDirectory = "/home/ubuntu/RemoteDesktop/NewImages/";
         appendCommandToQueue("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
-		// system("mandelbulber-opencl -keyframe -start 0 -end 1 /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract"); // TODO make this wait
-		system("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+		appendCommandToQueue("rm /home/ubuntu/RemoteDesktop/RightKeys/keyframe00000.fract");
+        runCommandQueue(true);
 		int frameNumber = fractParam.fractal.frameNo;
 		char initRightFramePath[100];
 		sprintf(initRightFramePath, "/home/ubuntu/RemoteDesktop/RightImages/images%05d.jpg", frameNumber);
@@ -2571,14 +2566,15 @@ void MainRender(void)
 		std::string initRightFramePathS = initRightFramePath;
 		std::string rightFramePathS = rightFramePath;
 		std::string systemCommand = "mv " + initRightFramePathS + rightFramePathS;
-		system(systemCommand.c_str());
+		appendCommandToQueue(systemCommand.c_str());
 		char leftFramePath[100];
 		sprintf(leftFramePath, "/home/ubuntu/RemoteDesktop/LeftImages/images%05d.jpg", frameNumber);
 		std::string leftFramePathS = rightFramePath;
 		systemCommand = "mv " + leftFramePathS + imageDirectory;
-		system(systemCommand.c_str());
+		appendCommandToQueue(systemCommand.c_str());
 		systemCommand = "mv " + rightFramePathS + imageDirectory;
-		system(systemCommand.c_str());
+		appendCommandToQueue(systemCommand.c_str());
+        runCommandQueue(true);
 	}
 	///
 }
