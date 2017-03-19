@@ -2452,8 +2452,8 @@ void MainRender(void)
 
 						fractParam.stereoEnabled = 1;
 						fractParam.fractal.frameNo = initFrameNo;
-						strcpy(fractParam.file_destination, initFileDestination);
-						strcpy(fractParam.file_keyframes, initKeyframeDestiantion);
+						strcpy(fractParam.file_destination, initFileDestination.c_str());
+						strcpy(fractParam.file_keyframes, initKeyframeDestiantion.c_str());
 
 						/*secondEyeImage->ClearImage();
 						WriteLog("Image cleared");
