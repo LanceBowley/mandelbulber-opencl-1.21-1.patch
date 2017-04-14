@@ -2399,19 +2399,10 @@ void MainRender(void)
 					mRotForEyes.RotateZ(fractParam.doubles.alpha);
 					mRotForEyes.RotateX(fractParam.doubles.beta);
 					mRotForEyes.RotateY(fractParam.doubles.gamma);
-
-                    // LANCE
-					// CVector3 baseVectorForEyes(0.5 * fractParam.doubles.scaleRelativeEyeDistance, 0, 0); // Previously
-                    distance = CalculateDistance(fractParam.doubles.vp, fractParam.fractal);
-                    double eyeDistance = distance*fractParam.doubles.scaleRelativeEyeDistance;
-                    // sprintf(label_text, "Distance to fractal: %g, Stereo distance: %g", distance, eyeDistance);
-                    // gtk_label_set_text(GTK_LABEL(Interface.label_NavigatorEstimatedDistance), label_text);
-
-                    CVector3 baseVectorForEyes(0.5 * eyeDistance, 0, 0);
+					CVector3 baseVectorForEyes(0.5 * fractParam.doubles.scaleRelativeEyeDistance, 0, 0);
 					eyeLeft = fractParam.doubles.vp - mRotForEyes.RotateVector(baseVectorForEyes);
 					eyeRight = fractParam.doubles.vp + mRotForEyes.RotateVector(baseVectorForEyes);
 					numberOfEyes = 2;
-
 				}
 
 				//if number of eyes = 2 (stereo) then render two times
